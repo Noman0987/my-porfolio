@@ -38,7 +38,7 @@ const FloatingCode = styled.div`
 `;
 
 const AboutContainer = styled.div`
-  padding: 80px 0 60px 0;
+  padding: 120px 0 60px 0;
   background: linear-gradient(180deg, rgba(24,26,27,1) 0%, rgba(36,37,38,1) 100%);
   min-height: calc(100vh - 140px);
   position: relative;

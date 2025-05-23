@@ -62,7 +62,7 @@ const HeroSection = styled.section`
   color: #fff;
   text-align: center;
   position: relative;
-  padding: 100px 20px 80px 20px;
+  padding: 190px 20px 80px 20px;
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
   animation: ${fadeInUp} 0.8s both;
   will-change: transform, opacity;
@@ -1027,7 +1027,6 @@ const Home = () => {
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
           <a href="https://github.com" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
         </Socials>
-        <FooterCodeIcon><FaCode /></FooterCodeIcon>
         &copy; {new Date().getFullYear()} Noman Ahmad. All rights reserved.
       </Footer>
   </HomeContainer>

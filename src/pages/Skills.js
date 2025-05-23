@@ -32,7 +32,7 @@ const FloatingCode = styled.div`
 `;
 
 const SkillsContainer = styled.div`
-  padding: 60px 0 40px 0;
+  padding: 100px 0 40px 0;
   background: ${sectionBG};
   min-height: calc(100vh - 140px);
   @media (max-width: 600px) {
