@@ -129,7 +129,7 @@ const CodeBlock = styled.pre`
 
 const ContactInfo = styled.div`
   font-size: 1.1rem;
-  margin-bottom: 18px;
+  margin: 24px 0 18px 0;
   color: #e0eafc;
   display: flex;
   justify-content: center;
@@ -139,6 +139,7 @@ const ContactInfo = styled.div`
   @media (max-width: 600px) {
     font-size: 0.98rem;
     gap: 10px;
+    margin: 20px 0 15px 0;
   }
 `;
 
@@ -829,7 +830,7 @@ const Home = () => {
           />
         </CodeBlock>
         <ContactInfo>
-          <span><FaMapMarkerAlt /> Lahore, Pakistan</span>
+          {/* <span><FaMapMarkerAlt /> Lahore, Pakistan</span> */}
           <span><FaPhone /> +923104549899</span>
           <span><FaEnvelope /> letstar432@gmail.com</span>
         </ContactInfo>
