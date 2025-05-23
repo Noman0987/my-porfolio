@@ -121,21 +121,20 @@ const CodeBlock = styled.pre`
   box-shadow: 0 2px 16px #00f2fe33;
   text-align: left;
   animation: ${fadeInUp} 1.5s both;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: hidden;
+  overflow-x: auto;
+
   @media (max-width: 600px) {
     font-size: 0.95rem;
-    padding: 12px 16px;
-    width: 85%;
+    padding: 12px 10px;
+    width: 90%;
     margin: 20px auto 0 auto;
-    max-width: calc(100% - 32px);
+    max-width: calc(100% - 20px);
   }
   @media (max-width: 400px) {
     font-size: 0.85rem;
-    padding: 10px 12px;
-    width: 80%;
-    max-width: calc(100% - 24px);
+    padding: 10px 8px;
+    width: 95%;
+    max-width: calc(100% - 16px);
   }
 `;
 
