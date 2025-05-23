@@ -30,7 +30,7 @@ const ContactContainer = styled.div`
   background: ${sectionBG};
   min-height: calc(100vh - 140px);
   @media (max-width: 600px) {
-    padding: 36px 0 24px 0;
+    padding: 100px 0 24px 0;
   }
 `;
 

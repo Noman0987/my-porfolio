@@ -43,7 +43,7 @@ const ResumeContainer = styled.div`
   min-height: calc(100vh - 140px);
   position: relative;
   @media (max-width: 600px) {
-    padding: 36px 0 24px 0;
+    padding: 100px 0 24px 0;
   }
 `;
 

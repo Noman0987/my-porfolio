@@ -44,7 +44,7 @@ const AboutContainer = styled.div`
   position: relative;
   overflow: hidden;
   @media (max-width: 600px) {
-    padding: 60px 0 40px 0;
+    padding: 100px 0 40px 0;
   }
 `;
 

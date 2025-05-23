@@ -69,7 +69,7 @@ const HeroSection = styled.section`
   transform: translateZ(0);
   backface-visibility: hidden;
   @media (max-width: 600px) {
-    padding: 50px 6vw 40px 6vw;
+    padding: 100px 6vw 40px 6vw;
     min-height: 50vh;
     background-attachment: scroll;
   }
