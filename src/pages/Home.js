@@ -830,7 +830,7 @@ const Home = () => {
         </CodeBlock>
         <ContactInfo>
           <span><FaMapMarkerAlt /> Lahore, Pakistan</span>
-          <span><FaPhone /> 03104549899</span>
+          <span><FaPhone /> +923104549899</span>
           <span><FaEnvelope /> letstar432@gmail.com</span>
         </ContactInfo>
         <CTAButton href="#contact">Let's Work Together</CTAButton>

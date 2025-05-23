@@ -96,10 +96,10 @@ const ImageContainer = styled.div`
   align-items: center;
   position: relative;
   min-width: 250px;
-  max-width: 400px; /* Adjust based on desired maximum size */
+  max-width: 400px;
   width: 100%;
   border-radius: 15px;
-  overflow: hidden; /* Ensure image zoom/crop is contained */
+  overflow: hidden;
 
   &::before {
     content: '';
@@ -110,14 +110,14 @@ const ImageContainer = styled.div`
     bottom: 0;
     background: linear-gradient(to right, rgba(24,26,27,0.98) 0%, rgba(24,26,27,0.8) 30%, transparent 60%);
     pointer-events: none;
-    z-index: 1; /* Ensure overlay is above the image */
+    z-index: 1;
   }
 
   @media (max-width: 900px) {
-    order: -1; /* Place image above text on smaller screens */
+    order: -1;
     max-width: 300px;
     &::before {
-      background: linear-gradient(to bottom, rgba(24,26,27,0.98) 0%, rgba(24,26,27,0.8) 30%, transparent 60%);
+      background: linear-gradient(to top, rgba(24,26,27,0.98) 0%, rgba(24,26,27,0.8) 30%, transparent 60%);
     }
   }
 `;
@@ -125,13 +125,17 @@ const ImageContainer = styled.div`
 const StyledImage = styled.img`
   display: block;
   width: 100%;
-  height: 100%; /* Set height to 100% of container for object-fit to work effectively */
+  height: 100%;
   border-radius: 15px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 0 16px rgba(0,242,254,0.2);
   object-fit: cover;
-  object-position: 50% 15%; /* Shift the image up to crop more from the bottom */
-  transform: scale(1.3); /* Zoom out slightly */
+  object-position: 50% 15%;
+  transform: scale(1.3);
   transition: transform 0.5s ease-in-out;
+
+  @media (max-width: 900px) {
+    object-position: 50% 30%;
+  }
 `;
 
 const About = () => (
