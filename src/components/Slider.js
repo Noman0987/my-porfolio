@@ -298,66 +298,119 @@ const Dot = styled.button`
   }
 `;
 
-const AnimatedContent = ({ items, renderItem, isTech = false }) => {
+const Slider = ({ items, renderItem, isTech = false }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  const handlePrev = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
-    setIsAutoPlaying(false);
-  }, [items.length]);
+  const contentRef = React.useRef(null);
+  const [touchStartX, setTouchStartX] = useState(null);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-    setIsAutoPlaying(false);
   }, [items.length]);
 
-  const handleDotClick = useCallback((index) => {
-    setCurrentIndex(index);
-    setIsAutoPlaying(false);
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length) % items.length);
+  }, [items.length]);
+
+  // Autoplay functionality (optional)
+  useEffect(() => {
+    const interval = setInterval(handleNext, 2000); // Change slide every 2 seconds
+    return () => clearInterval(interval);
+  }, [handleNext]);
+
+  const handleTouchStart = useCallback((e) => {
+    setTouchStartX(e.touches[0].clientX);
   }, []);
 
-  useEffect(() => {
-    let interval;
-    if (isAutoPlaying) {
-      interval = setInterval(handleNext, 5000);
+  const handleTouchMove = useCallback((e) => {
+    if (touchStartX === null) return;
+    // Prevent default to avoid scrolling while swiping
+    e.preventDefault();
+  }, [touchStartX]);
+
+  const handleTouchEnd = useCallback((e) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const swipeDistance = touchStartX - touchEndX;
+    const minSwipeDistance = 50; // Minimum distance to register a swipe
+
+    if (swipeDistance > minSwipeDistance) {
+      // Swiped left
+      handleNext();
+    } else if (swipeDistance < -minSwipeDistance) {
+      // Swiped right
+      handlePrev();
     }
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, handleNext]);
+    setTouchStartX(null);
+  }, [touchStartX, handleNext, handlePrev]);
+
+  // Optional: Add mouse drag support for desktop
+  const [mouseStartX, setMouseStartX] = useState(null);
+
+  const handleMouseDown = useCallback((e) => {
+    setMouseStartX(e.clientX);
+  }, []);
+
+  const handleMouseMove = useCallback((e) => {
+    if (mouseStartX === null) return;
+    e.preventDefault(); // Prevent selection while dragging
+  }, [mouseStartX]);
+
+  const handleMouseUp = useCallback((e) => {
+    if (mouseStartX === null) return;
+    const mouseEndX = e.clientX;
+    const swipeDistance = mouseStartX - mouseEndX;
+    const minSwipeDistance = 50; // Minimum distance to register a swipe
+
+    if (swipeDistance > minSwipeDistance) {
+      // Swiped left
+      handleNext();
+    } else if (swipeDistance < -minSwipeDistance) {
+      // Swiped right
+      handlePrev();
+    }
+    setMouseStartX(null);
+  }, [mouseStartX, handleNext, handlePrev]);
+
+  const handleMouseLeave = useCallback(() => {
+    setMouseStartX(null);
+  }, []);
+
 
   return (
     <ContentWrapper isTech={isTech}>
       <ContentBG />
-      <ContentContainer>
+      <ContentContainer
+        ref={contentRef}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+      >
         {items.map((item, index) => (
-          <ContentItem 
-            key={index} 
-            active={index === currentIndex}
-            isTech={isTech}
-          >
-            <div>
-              {renderItem(item)}
-            </div>
+          <ContentItem key={index} active={index === currentIndex} isTech={isTech}>
+            {renderItem(item)}
           </ContentItem>
         ))}
       </ContentContainer>
-      <NavigationButton className="prev" onClick={handlePrev}>
-        <FaChevronLeft />
-      </NavigationButton>
-      <NavigationButton className="next" onClick={handleNext}>
-        <FaChevronRight />
-      </NavigationButton>
-      <DotsContainer>
+
+      {/* Removed Navigation Buttons */}
+
+      {/* Dot Navigation (Optional) */}
+      {/* <DotNavigation>
         {items.map((_, index) => (
           <Dot
             key={index}
             active={index === currentIndex}
-            onClick={() => handleDotClick(index)}
+            onClick={() => setCurrentIndex(index)}
           />
         ))}
-      </DotsContainer>
+      </DotNavigation> */}
+
     </ContentWrapper>
   );
 };
 
-export default React.memo(AnimatedContent); 
+export default React.memo(Slider); 
