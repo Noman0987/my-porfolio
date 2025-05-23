@@ -30,7 +30,7 @@ const ContactContainer = styled.div`
   background: ${sectionBG};
   min-height: calc(100vh - 140px);
   @media (max-width: 600px) {
-    padding: 100px 0 24px 0;
+    padding: 80px 0 24px 0;
   }
 `;
 
@@ -43,8 +43,9 @@ const ContactTitle = styled.h2`
   letter-spacing: 1px;
   text-shadow: 0 2px 12px rgba(0,0,0,0.18);
   @media (max-width: 600px) {
-    font-size: 1.3rem;
-    margin-bottom: 18px;
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    padding: 0 15px;
   }
 `;
 
@@ -57,14 +58,20 @@ const ContactForm = styled.form`
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   @media (max-width: 600px) {
     padding: 20px;
+    margin: 0 15px;
+    border-radius: 8px;
   }
   @media (max-width: 400px) {
     padding: 15px;
+    margin: 0 10px;
   }
 `;
 
 const FormGroup = styled.div`
   margin-bottom: 20px;
+  @media (max-width: 600px) {
+    margin-bottom: 15px;
+  }
 `;
 
 const Label = styled.label`
@@ -72,6 +79,10 @@ const Label = styled.label`
   margin-bottom: 8px;
   color: #fff;
   font-weight: 500;
+  @media (max-width: 600px) {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
 `;
 
 const Input = styled.input`
@@ -86,6 +97,10 @@ const Input = styled.input`
     outline: none;
     border-color: #43cea2;
     box-shadow: 0 0 0 2px #43cea244;
+  }
+  @media (max-width: 600px) {
+    padding: 10px;
+    font-size: 14px;
   }
 `;
 
@@ -104,6 +119,11 @@ const TextArea = styled.textarea`
     border-color: #43cea2;
     box-shadow: 0 0 0 2px #43cea244;
   }
+  @media (max-width: 600px) {
+    padding: 10px;
+    font-size: 14px;
+    min-height: 120px;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -114,9 +134,15 @@ const SubmitButton = styled.button`
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  width: 100%;
   &:hover {
     background: #2980b9;
+    transform: translateY(-2px);
+  }
+  @media (max-width: 600px) {
+    padding: 10px 20px;
+    font-size: 14px;
   }
 `;
 
@@ -124,6 +150,17 @@ const ContactInfo = styled.div`
   text-align: center;
   margin-top: 30px;
   color: #e0eafc;
+  padding: 0 15px;
+  @media (max-width: 600px) {
+    margin-top: 20px;
+    font-size: 0.95rem;
+  }
+  p {
+    margin: 8px 0;
+    @media (max-width: 600px) {
+      margin: 6px 0;
+    }
+  }
 `;
 
 const Contact = () => (
@@ -139,26 +176,26 @@ const Contact = () => (
     <ContactForm>
       <FormGroup>
         <Label htmlFor="name">Name</Label>
-        <Input type="text" id="name" name="name" required />
+        <Input type="text" id="name" name="name" required placeholder="Your name" />
       </FormGroup>
       <FormGroup>
         <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" name="email" required />
+        <Input type="email" id="email" name="email" required placeholder="Your email address" />
       </FormGroup>
       <FormGroup>
         <Label htmlFor="subject">Subject</Label>
-        <Input type="text" id="subject" name="subject" required />
+        <Input type="text" id="subject" name="subject" required placeholder="Message subject" />
       </FormGroup>
       <FormGroup>
         <Label htmlFor="message">Message</Label>
-        <TextArea id="message" name="message" required />
+        <TextArea id="message" name="message" required placeholder="Your message here..." />
       </FormGroup>
       <SubmitButton type="submit">Send Message</SubmitButton>
     </ContactForm>
     <ContactInfo>
       <p>Feel free to reach out to me for any inquiries or collaboration opportunities.</p>
-      <p>Email: your.email@example.com</p>
-      <p>Location: Your City, Country</p>
+      <p>Email: letstar432@gmail.com</p>
+      <p>Location: Lahore, Pakistan</p>
     </ContactInfo>
   </ContactContainer>
 );

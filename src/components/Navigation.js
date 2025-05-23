@@ -41,7 +41,7 @@ const NavList = styled.ul`
     top: 60px;
     left: 0;
     width: 100vw;
-    background: ${glassyBG};
+    background: rgba(24, 26, 27, 0.85);
     flex-direction: column;
     align-items: center;
     box-shadow: 0 8px 32px 0 rgba(0,0,0,0.13);
@@ -49,15 +49,20 @@ const NavList = styled.ul`
     overflow: hidden;
     transition: max-height 0.3s ease;
     animation: ${({ open }) => open ? slideDown : 'none'} 0.4s cubic-bezier(.23,1.02,.32,1) both;
-    backdrop-filter: ${({ open }) => open ? 'blur(10px)' : 'none'};
-    -webkit-backdrop-filter: ${({ open }) => open ? 'blur(10px)' : 'none'};
+    backdrop-filter: ${({ open }) => open ? 'blur(16px) saturate(1.8)' : 'none'};
+    -webkit-backdrop-filter: ${({ open }) => open ? 'blur(16px) saturate(1.8)' : 'none'};
+    border-bottom: 1px solid rgba(0,242,254,0.15);
+    border-radius: 0 0 22px 22px;
+    padding: ${({ open }) => (open ? '10px 0' : '0')};
   }
 `;
 
 const NavItem = styled.li`
   margin: 0 10px;
   @media (max-width: 800px) {
-    margin: 18px 0;
+    margin: 12px 0;
+    width: 100%;
+    text-align: center;
   }
 `;
 
@@ -69,7 +74,7 @@ const NavLink = styled(Link)`
   border-radius: 30px;
   text-decoration: none;
   position: relative;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: all 0.3s ease;
   box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
   overflow: hidden;
   letter-spacing: 0.5px;
@@ -97,6 +102,16 @@ const NavLink = styled(Link)`
   &:hover::after, &.active::after {
     opacity: 1;
     transform: scaleX(1);
+  }
+  @media (max-width: 800px) {
+    display: block;
+    padding: 12px 20px;
+    margin: 0 15px;
+    border-radius: 12px;
+    background: rgba(0,242,254,0.08);
+    &:hover, &.active {
+      background: rgba(0,242,254,0.15);
+    }
   }
   @keyframes navGlow {
     0% { box-shadow: 0 0 8px 0 #00f2fe44; }
