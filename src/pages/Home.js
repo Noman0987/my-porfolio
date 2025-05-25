@@ -1,7 +1,8 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState, useCallback } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Card from '../components/Card';
 import Slider from '../components/Slider';
+import ThreeScene from '../components/ThreeScene';
 import { FaMapMarkerAlt, FaEnvelope, FaPhone, FaArrowDown, FaReact, FaPhp, FaLaravel, FaAws, FaDocker, FaGithub, FaLinkedin, FaTwitter, FaFacebook, FaCode, FaArrowRight } from 'react-icons/fa';
 import { Typewriter } from 'react-simple-typewriter';
 
@@ -18,31 +19,6 @@ const gradients = [
   'linear-gradient(135deg, #f953c6 0%, #b91d73 100%)',
 ];
 
-const fadeInUp = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-`;
-
-const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`;
-
-const glow = keyframes`
-  0% { box-shadow: 0 0 0 0 #00f2fe44; }
-  50% { box-shadow: 0 0 16px 4px #00f2fe99; }
-  100% { box-shadow: 0 0 0 0 #00f2fe44; }
-`;
-
-const typewriter = keyframes`
-  from { width: 0 }
-  to { width: 100% }
-`;
-
-const blink = keyframes`
-  50% { border-color: transparent }
-`;
-
 const HomeContainer = styled.div`
   background: ${darkBG};
   min-height: 100vh;
@@ -53,7 +29,7 @@ const HomeContainer = styled.div`
 `;
 
 const HeroSection = styled.section`
-  min-height: 70vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,17 +38,60 @@ const HeroSection = styled.section`
   color: #fff;
   text-align: center;
   position: relative;
-  padding: 190px 20px 80px 20px;
+  padding: 120px 20px 80px 20px;
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
-  animation: ${fadeInUp} 0.8s both;
   will-change: transform, opacity;
   transform: translateZ(0);
   backface-visibility: hidden;
+  overflow: hidden;
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+
   @media (max-width: 600px) {
     padding: 100px 6vw 40px 6vw;
-    min-height: 50vh;
+    min-height: 70vh;
     background-attachment: scroll;
   }
+`;
+
+const ThreeSceneBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+`;
+
+const HeroContentWrapper = styled.div`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media (max-width: 768px) {
+    padding: 0 15px;
+  }
+  @media (max-width: 480px) {
+    padding: 0 10px;
+  }
+`;
+
+const TextContentContainer = styled.div`
+  text-align: center;
 `;
 
 const Avatar = styled.img`
@@ -84,7 +103,6 @@ const Avatar = styled.img`
   margin-bottom: 18px;
   box-shadow: 0 2px 24px 0 #00f2fe99, 0 0 0 8px #00f2fe22;
   background: #232526;
-  animation: ${fadeInUp} 1.2s both;
 `;
 
 const AnimatedTitle = styled.h1`
@@ -93,7 +111,6 @@ const AnimatedTitle = styled.h1`
   margin-bottom: 12px;
   letter-spacing: 2px;
   color: #fff;
-  animation: ${fadeInUp} 1.3s both;
   text-shadow: 0 2px 16px #00f2fe44;
   @media (max-width: 600px) {
     font-size: 1.5rem;
@@ -105,7 +122,6 @@ const Subtitle = styled.h2`
   font-weight: 500;
   color: #e0eafc;
   margin-bottom: 18px;
-  animation: ${fadeInUp} 1.4s both;
 `;
 
 const CodeBlock = styled.pre`
@@ -120,7 +136,6 @@ const CodeBlock = styled.pre`
   width: 90%;
   box-shadow: 0 2px 16px #00f2fe33;
   text-align: left;
-  animation: ${fadeInUp} 1.5s both;
   overflow-x: auto;
 
   @media (max-width: 600px) {
@@ -146,7 +161,6 @@ const ContactInfo = styled.div`
   justify-content: center;
   gap: 18px;
   flex-wrap: wrap;
-  animation: ${fadeIn} 1.5s both;
   @media (max-width: 600px) {
     font-size: 0.98rem;
     gap: 10px;
@@ -166,7 +180,6 @@ const CTAButton = styled.a`
   border-radius: 30px;
   text-decoration: none;
   box-shadow: 0 2px 12px #00f2fe55;
-  animation: ${glow} 2.5s infinite;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   &:hover {
     background: #fff;
@@ -175,30 +188,10 @@ const CTAButton = styled.a`
   }
 `;
 
-const ScrollDown = styled.div`
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  color: #fff;
-  opacity: 0.7;
-  font-size: 2.2rem;
-  animation: bounce 2s infinite;
-  @keyframes bounce {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, 12px); }
-  }
-  @media (max-width: 600px) {
-    font-size: 1.5rem;
-    bottom: 8px;
-  }
-`;
-
 const Section = styled.section`
   padding: 60px 0 40px 0;
   background: ${sectionBG};
   box-shadow: 0 2px 24px 0 rgba(0,0,0,0.18);
-  animation: ${fadeInUp} 0.8s both;
   will-change: transform, opacity;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -215,7 +208,6 @@ const SectionTitle = styled.h2`
   letter-spacing: 1px;
   font-weight: 700;
   text-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  animation: ${fadeInUp} 1.2s both;
   @media (max-width: 600px) {
     font-size: 1.3rem;
     margin-bottom: 18px;
@@ -228,11 +220,6 @@ const AnimatedUnderline = styled.div`
   margin: 0 auto 18px auto;
   background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
   border-radius: 2px;
-  animation: underlineGrow 1.2s cubic-bezier(.23,1.02,.32,1) both;
-  @keyframes underlineGrow {
-    from { width: 0; opacity: 0; }
-    to { width: 60px; opacity: 1; }
-  }
 `;
 
 const AboutText = styled.p`
@@ -241,7 +228,6 @@ const AboutText = styled.p`
   color: #e0eafc;
   font-size: 1.15rem;
   line-height: 1.7;
-  animation: ${fadeIn} 1.2s both;
   @media (max-width: 600px) {
     font-size: 1rem;
     padding: 0 2vw;
@@ -323,7 +309,6 @@ const Socials = styled.div`
 const SliderSection = styled.section`
   background: ${sectionBG};
   padding: 48px 0 32px 0;
-  animation: ${fadeInUp} 0.8s both;
   will-change: transform, opacity;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -337,7 +322,6 @@ const SliderTitle = styled.h2`
   font-weight: 700;
   letter-spacing: 1px;
   text-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  animation: ${fadeInUp} 1s both;
 `;
 
 const TechIcons = styled.div`
@@ -359,31 +343,9 @@ const ContactTeaser = styled.div`
   color: #fff;
   font-size: 1.2rem;
   margin-top: 18px;
-  animation: ${fadeInUp} 1.2s both;
   @media (max-width: 600px) {
     font-size: 1rem;
     padding: 0 2vw;
-  }
-`;
-
-const FloatingCode = styled.div`
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-  span {
-    position: absolute;
-    color: #00f2fe;
-    font-size: 2.2rem;
-    opacity: 0.18;
-    animation: floatCode 12s linear infinite;
-    will-change: transform;
-    @keyframes floatCode {
-      0% { transform: translateY(120vh) scale(0.8) rotate(0deg); opacity: 0.18; }
-      50% { opacity: 0.32; }
-      100% { transform: translateY(-10vh) scale(1.1) rotate(360deg); opacity: 0.18; }
-    }
   }
 `;
 
@@ -397,23 +359,6 @@ const CardBrackets = styled.span`
   pointer-events: none;
 `;
 
-const SliderCodeBG = styled.div`
-  position: absolute;
-  top: 10px; left: 0; width: 100%; height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 4rem;
-  color: #00f2fe22;
-  animation: codeIconFloat 6s ease-in-out infinite alternate;
-  @keyframes codeIconFloat {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(18px) scale(1.08); }
-  }
-`;
-
 const CodeDivider = styled.div`
   width: 100%;
   text-align: center;
@@ -421,20 +366,19 @@ const CodeDivider = styled.div`
   font-size: 1.6rem;
   color: #00f2fe99;
   letter-spacing: 0.2em;
-  animation: fadeInUp 1.2s both;
 `;
 
 const FooterCodeIcon = styled.span`
   color: #00f2fe;
   font-size: 2.2rem;
   margin-right: 12px;
-  animation: ${glow} 2.5s infinite;
   vertical-align: middle;
 `;
 
 const CardSparkle = styled.span`
   position: absolute;
-  top: 12px; right: 18px;
+  top: 12px;
+  right: 18px;
   font-size: 1.2rem;
   color: #fff;
   opacity: 0;
@@ -450,7 +394,6 @@ const ProjectGrid = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  animation: ${fadeInUp} 0.8s both;
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -480,7 +423,6 @@ const ProjectCard = styled.div`
   transition: all 0.4s cubic-bezier(.23,1.02,.32,1);
   position: relative;
   overflow: hidden;
-  animation: ${fadeInUp} 0.8s both;
   animation-delay: ${props => props.delay || '0s'};
 
   &:hover {
@@ -559,7 +501,6 @@ const StatsSection = styled.section`
   background: ${sectionBG};
   padding: 60px 0;
   text-align: center;
-  animation: ${fadeInUp} 0.8s both;
 `;
 
 const StatsGrid = styled.div`
@@ -592,7 +533,6 @@ const StatCard = styled.div`
   border: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 8px 32px rgba(0,0,0,0.15);
   transition: all 0.4s cubic-bezier(.23,1.02,.32,1);
-  animation: ${fadeInUp} 0.8s both;
   animation-delay: ${props => props.delay || '0s'};
 
   &:hover {
@@ -621,7 +561,6 @@ const SkillsShowcaseSection = styled.section`
   padding: 80px 0;
   position: relative;
   overflow: hidden;
-  animation: ${fadeInUp} 0.8s both;
 `;
 
 const SkillsShowcaseContainer = styled.div`
@@ -640,7 +579,6 @@ const SkillsShowcaseTitle = styled.h2`
   font-weight: 700;
   letter-spacing: 1px;
   text-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  animation: ${fadeInUp} 1s both;
 `;
 
 const SkillsGrid = styled.div`
@@ -672,7 +610,6 @@ const SkillCard = styled.div`
   border: 1px solid rgba(0,242,254,0.2);
   box-shadow: 0 8px 32px rgba(0,242,254,0.15);
   transition: all 0.3s ease;
-  animation: ${fadeInUp} 0.8s both;
   animation-delay: ${props => props.delay || '0s'};
 
   &:hover {
@@ -812,41 +749,55 @@ const Home = () => {
   const MemoizedCard = React.memo(Card);
   const MemoizedSlider = React.memo(Slider);
 
+  const [mousePosition, setMousePosition] = useState([0, 0]);
+
+  const handleMouseMove = useCallback((event) => {
+    const { clientX, clientY } = event;
+    const { left, top, width, height } = event.currentTarget.getBoundingClientRect();
+    const mouseX = ((clientX - left) / width) * 2 - 1;
+    const mouseY = -(((clientY - top) / height) * 2 - 1);
+    setMousePosition([mouseX, mouseY]);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setMousePosition([0, 0]);
+  }, []);
+
   return (
   <HomeContainer>
-      <HeroSection>
-        <FloatingCode>
-          <span style={{left:'10%', animationDelay:'0s'}}>&lt;/&gt;</span>
-          <span style={{left:'30%', animationDelay:'2s'}}>&#123; &#125;</span>
-          <span style={{left:'60%', animationDelay:'1s'}}>&lt;?php</span>
-          <span style={{left:'80%', animationDelay:'3s'}}>&lt;div&gt;</span>
-          <span style={{left:'50%', animationDelay:'4s'}}>&lt;h1&gt;</span>
-        </FloatingCode>
-        
-        <Avatar src="https://ui-avatars.com/api/?name=Noman+Ahmad&background=232526&color=fff&size=180" alt="Noman Ahmad" />
-        <AnimatedTitle>Noman Ahmad</AnimatedTitle>
-        <Subtitle>Software Engineer / Laravel Developer</Subtitle>
-        <CodeBlock>
-          <Typewriter
-            words={[`$ php artisan make:model Project`,
-                    `const skills = ['Laravel', 'React', 'PHP', 'APIs'];`,
-                    `<Portfolio developer="Noman Ahmad" />`,
-                    `echo 'Let\'s build something amazing!';`]}
-            loop={0}
-            cursor
-            cursorStyle='|'
-            typeSpeed={55}
-            deleteSpeed={30}
-            delaySpeed={1800}
-          />
-        </CodeBlock>
-        <ContactInfo>
-          {/* <span><FaMapMarkerAlt /> Lahore, Pakistan</span> */}
-          <span><FaPhone /> +923104549899</span>
-          <span><FaEnvelope /> letstar432@gmail.com</span>
-        </ContactInfo>
-        <CTAButton href="#contact">Let's Work Together</CTAButton>
-        <ScrollDown><FaArrowDown /></ScrollDown>
+      <HeroSection onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+        <ThreeSceneBackground>
+          <ThreeScene mousePosition={mousePosition} />
+        </ThreeSceneBackground>
+
+        <HeroContentWrapper>
+          <TextContentContainer>
+            <Avatar src="https://ui-avatars.com/api/?name=Noman+Ahmad&background=232526&color=fff&size=180" alt="Noman Ahmad" />
+            <AnimatedTitle>Noman Ahmad</AnimatedTitle>
+            <Subtitle>Software Engineer / Laravel Developer</Subtitle>
+            <CodeBlock>
+              <Typewriter
+                words={[`$ php artisan make:model Project`,
+                        `const skills = ['Laravel', 'React', 'PHP', 'APIs'];`,
+                        `<Portfolio developer="Noman Ahmad" />`,
+                        `echo 'Let\'s build something amazing!';`]}
+                loop={0}
+                cursor
+                cursorStyle='|'
+                typeSpeed={55}
+                deleteSpeed={30}
+                delaySpeed={1800}
+              />
+            </CodeBlock>
+            <ContactInfo>
+              {/* <span><FaMapMarkerAlt /> Lahore, Pakistan</span> */}
+              <span><FaPhone /> +923104549899</span>
+              <span><FaEnvelope /> letstar432@gmail.com</span>
+            </ContactInfo>
+            <CTAButton href="#contact">Let's Work Together</CTAButton>
+          </TextContentContainer>
+        </HeroContentWrapper>
+
       </HeroSection>
 
       <SkillsShowcaseSection>
