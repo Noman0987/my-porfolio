@@ -1,110 +1,95 @@
-import React, { useRef, useMemo, useEffect } from 'react';
+import React, { useRef, useMemo, useCallback, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Text } from '@react-three/drei';
 import * as THREE from 'three';
 
-// New component for an interactive animation
-// This component will receive mouse position data and react to it
-const InteractiveAnimation = ({ mousePosition }) => {
-  const particlesRef = useRef();
-  const { size, viewport } = useThree();
+const color = new THREE.Color();
 
-  const count = 10000; // Number of particles
-  const particleSize = 0.05; // Size of each particle
+function Particles({
+  pointCount = 1000,
+  particleSize = 0.05,
+  color = new THREE.Color('#8b7bf3'), // Updated particle color
+  mousePosition // Accept mouse position prop
+}) {
+  const meshRef = useRef();
+  const dummy = useMemo(() => new THREE.Object3D(), []);
 
-  // Generate initial random positions
-  const positions = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      // Distribute particles randomly in a larger area
-      positions[i * 3] = (Math.random() - 0.5) * 20; // X
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 15; // Y
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 10; // Z
+  const particles = useMemo(() => {
+    const temp = [];
+    for (let i = 0; i < pointCount; i++) {
+      const theta = Math.random() * Math.PI * 2; // Angle
+      const radius = 1 + Math.random() * 4; // Distance from center
+      const x = radius * Math.cos(theta);
+      const y = radius * Math.sin(theta);
+      const z = (Math.random() - 0.5) * 2; // Z-depth
+
+      temp.push({
+        position: new THREE.Vector3(x, y, z),
+        rotation: new THREE.Euler(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI),
+        scale: Math.random() * 0.2 + 0.05,
+        velocity: new THREE.Vector3(Math.random() * 0.01 - 0.005, Math.random() * 0.01 - 0.005, Math.random() * 0.01 - 0.005)
+      });
     }
-    return positions;
-  }, [count]);
-
-   const originalPositions = useMemo(() => Float32Array.from(positions), [positions]);
+    return temp;
+  }, [pointCount]);
 
   useFrame((state) => {
-    if (particlesRef.current && mousePosition) {
-      const positionsArray = particlesRef.current.geometry.attributes.position.array;
-      const tempVector = new THREE.Vector3();
+    const time = state.clock.getElapsedTime();
 
-      // Convert normalized mouse position (-1 to 1) to world coordinates
-      // Adjust these multipliers based on the desired area of effect and scene scale
-      const mouseX = mousePosition[0] * (viewport.width / 2);
-      const mouseY = mousePosition[1] * (viewport.height / 2);
-      const mouse3D = new THREE.Vector3(mouseX, mouseY, 0); // Assume interaction is on a plane at Z=0
+    particles.forEach((particle, i) => {
+      // Base movement
+      particle.position.add(particle.velocity);
 
-      for (let i = 0; i < count; i++) {
-        const i3 = i * 3;
-        tempVector.set(positionsArray[i3], positionsArray[i3 + 1], positionsArray[i3 + 2]);
+      // Keep particles within bounds (simple reset)
+      if (particle.position.length() > 6) {
+        particle.position.set(
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2
+        ).normalize().multiplyScalar(5);
+      }
 
-        const distance = tempVector.distanceTo(mouse3D);
+      // Interaction with mouse position
+      if (mousePosition) {
+        const mouseVec = new THREE.Vector3(mousePosition[0] * 5, mousePosition[1] * 5, 0);
+        const direction = new THREE.Vector3().subVectors(particle.position, mouseVec);
+        const distance = direction.length();
+        const repulsionForce = 0.005 / (distance * distance); // Inverse square law repulsion
 
-        // Calculate a force based on distance (closer particles are affected more)
-        const force = (maxDistance - distance) / maxDistance; // maxDistance to be defined or calculated
-
-        if (force > 0) {
-             // Direction from particle to mouse
-            tempVector.sub(mouse3D).normalize();
-
-            // Apply a subtle push force away from the mouse (ripple effect)
-            positionsArray[i3] += tempVector.x * force * 0.01; // Adjust multiplier for strength
-            positionsArray[i3 + 1] += tempVector.y * force * 0.01; // Adjust multiplier for strength
-            // Z position could also be affected
-
-            // Optional: Gradually return particles to original positions
-             positionsArray[i3] = THREE.MathUtils.lerp(positionsArray[i3], originalPositions[i3], 0.005); // Adjust speed
-             positionsArray[i3 + 1] = THREE.MathUtils.lerp(positionsArray[i3 + 1], originalPositions[i3 + 1], 0.005); // Adjust speed
-             positionsArray[i3 + 2] = THREE.MathUtils.lerp(positionsArray[i3 + 2], originalPositions[i3 + 2], 0.005); // Adjust speed
+        if (distance < 2) { // Only apply repulsion if close to mouse
+          direction.normalize().multiplyScalar(repulsionForce);
+          particle.position.add(direction);
         }
       }
-      particlesRef.current.geometry.attributes.position.needsUpdate = true;
-    }
-     // Add a subtle overall movement or rotation to the particle system (optional)
-    if(particlesRef.current) {
-        particlesRef.current.rotation.y += 0.0005;
-    }
+
+      // Update instance matrix
+      dummy.position.copy(particle.position);
+      dummy.rotation.copy(particle.rotation);
+      dummy.scale.set(particle.scale, particle.scale, particle.scale);
+      dummy.updateMatrix();
+      meshRef.current.setMatrixAt(i, dummy.matrix);
+    });
+
+    meshRef.current.instanceMatrix.needsUpdate = true;
   });
 
-   // You might need to adjust maxDistance based on your scene scale and particle distribution
-   const maxDistance = 3; // Example max distance for ripple effect
-
   return (
-    <points ref={particlesRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach='attributes-position'
-          array={positions}
-          count={count}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        color={'#00f2fe'}
-        size={particleSize}
-        sizeAttenuation={true}
-        transparent={true}
-        opacity={0.6}
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
+    <instancedMesh ref={meshRef} args={[null, null, pointCount]}>
+      <sphereGeometry args={[particleSize, 8, 8]} />
+      <meshBasicMaterial color={color} />
+    </instancedMesh>
   );
-};
+}
 
-const ThreeScene = ({ mousePosition }) => {
+function ThreeScene({ mousePosition }) {
   return (
-    <Canvas camera={{ position: [0, 0, 10], fov: 60 }}>
+    <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
       <ambientLight intensity={0.5} />
-      <pointLight position={[5, 5, 5]} intensity={0.7} />
-      <pointLight position={[-5, -5, 5]} intensity={0.4} /> {/* Adjusted z position */}
-      {/* Render the new interactive animation component, passing the mouse position */}
-      <InteractiveAnimation mousePosition={mousePosition} />
-      {/* <OrbitControls /> */}
+      <pointLight position={[10, 10, 10]} intensity={0.8} />
+      <Particles mousePosition={mousePosition} />
+      {/* <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />*/}
     </Canvas>
   );
-};
+}
 
 export default ThreeScene; 
