@@ -11,12 +11,12 @@ const sectionBG = 'rgba(24,26,27,0.98)';
 const overlay = 'linear-gradient(120deg, rgba(24,26,27,0.92) 60%, rgba(36,37,38,0.85) 100%)';
 const glassBG = 'rgba(34, 40, 49, 0.75)';
 const gradients = [
-  'linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)',
-  'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-  'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-  'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
-  'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
-  'linear-gradient(135deg, #f953c6 0%, #b91d73 100%)',
+  'linear-gradient(135deg, #8b7bf3 0%, #a79cfc 100%)',
+  'linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)',
+  'linear-gradient(135deg, #56ab2f 0%, #a8e063 100%)',
+  'linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%)',
+  'linear-gradient(135deg, #2bc0e4 0%, #eaecc6 100%)',
+  'linear-gradient(135deg, #42275a 0%, #734b6d 100%)',
 ];
 
 const HomeContainer = styled.div`
@@ -99,9 +99,9 @@ const Avatar = styled.img`
   height: 110px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #00f2fe;
+  border: 4px solid #8b7bf3;
   margin-bottom: 18px;
-  box-shadow: 0 2px 24px 0 #00f2fe99, 0 0 0 8px #00f2fe22;
+  box-shadow: 0 2px 24px 0 rgba(139,123,243,0.6), 0 0 0 8px rgba(139,123,243,0.3);
   background: #232526;
 `;
 
@@ -111,7 +111,7 @@ const AnimatedTitle = styled.h1`
   margin-bottom: 12px;
   letter-spacing: 2px;
   color: #fff;
-  text-shadow: 0 2px 16px #00f2fe44;
+  text-shadow: 0 2px 16px rgba(139,123,243,0.4);
   @media (max-width: 600px) {
     font-size: 1.5rem;
   }
@@ -126,7 +126,7 @@ const Subtitle = styled.h2`
 
 const CodeBlock = styled.pre`
   background: rgba(34, 40, 49, 0.85);
-  color: #00f2fe;
+  color: #8b7bf3;
   font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
   font-size: 1.1rem;
   border-radius: 12px;
@@ -134,7 +134,7 @@ const CodeBlock = styled.pre`
   margin: 24px auto 0 auto;
   max-width: 480px;
   width: 90%;
-  box-shadow: 0 2px 16px #00f2fe33;
+  box-shadow: 0 2px 16px rgba(139,123,243,0.3);
   text-align: left;
   overflow-x: auto;
 
@@ -175,16 +175,16 @@ const CTAButton = styled.a`
   font-size: 1.1rem;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+  background: linear-gradient(90deg, #8b7bf3 0%, #a79cfc 100%);
   border: none;
   border-radius: 30px;
   text-decoration: none;
-  box-shadow: 0 2px 12px #00f2fe55;
+  box-shadow: 0 2px 12px rgba(139,123,243,0.55);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   &:hover {
     background: #fff;
-    color: #00f2fe;
-    box-shadow: 0 4px 24px #00f2fe99;
+    color: #8b7bf3;
+    box-shadow: 0 4px 24px rgba(139,123,243,0.9);
   }
 `;
 
@@ -218,7 +218,7 @@ const AnimatedUnderline = styled.div`
   width: 60px;
   height: 4px;
   margin: 0 auto 18px auto;
-  background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+  background: linear-gradient(90deg, #8b7bf3 0%, #a79cfc 100%);
   border-radius: 2px;
 `;
 
@@ -264,14 +264,14 @@ const CardsContainer = styled.div`
 
 const SkillBadge = styled.span`
   display: inline-block;
-  background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+  background: linear-gradient(90deg, #8b7bf3 0%, #a79cfc 100%);
   color: #fff;
   border-radius: 20px;
   padding: 7px 18px;
   margin: 6px 8px 6px 0;
   font-size: 1rem;
   font-weight: 500;
-  box-shadow: 0 2px 8px #00f2fe33;
+  box-shadow: 0 2px 8px rgba(139,123,243,0.3);
   @media (max-width: 600px) {
     font-size: 0.95rem;
     padding: 6px 12px;
@@ -296,12 +296,12 @@ const Socials = styled.div`
   gap: 24px;
   font-size: 2rem;
   a {
-    color: #00f2fe;
+    color: #8b7bf3;
     transition: color 0.2s, transform 0.2s;
     &:hover {
       color: #fff;
       transform: scale(1.18) rotate(-8deg);
-      text-shadow: 0 0 16px #00f2fe99;
+      text-shadow: 0 0 16px rgba(139,123,243,0.8);
     }
   }
 `;
@@ -330,7 +330,7 @@ const TechIcons = styled.div`
   align-items: center;
   gap: 32px;
   font-size: 2.5rem;
-  color: #00f2fe;
+  color: #8b7bf3;
   margin-bottom: 18px;
   @media (max-width: 600px) {
     gap: 16px;
@@ -350,7 +350,7 @@ const ContactTeaser = styled.div`
 `;
 
 const CardBrackets = styled.span`
-  color: #00f2fe;
+  color: #8b7bf3;
   font-size: 1.5rem;
   font-weight: bold;
   opacity: 0.7;
@@ -364,12 +364,12 @@ const CodeDivider = styled.div`
   text-align: center;
   margin: 36px 0 36px 0;
   font-size: 1.6rem;
-  color: #00f2fe99;
+  color: rgba(139,123,243,0.6);
   letter-spacing: 0.2em;
 `;
 
 const FooterCodeIcon = styled.span`
-  color: #00f2fe;
+  color: #8b7bf3;
   font-size: 2.2rem;
   margin-right: 12px;
   vertical-align: middle;
@@ -384,7 +384,7 @@ const CardSparkle = styled.span`
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s, transform 0.3s;
-  filter: drop-shadow(0 0 8px #00f2fe);
+  filter: drop-shadow(0 0 8px #8b7bf3);
 `;
 
 const ProjectGrid = styled.div`
@@ -428,7 +428,7 @@ const ProjectCard = styled.div`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-    border-color: rgba(0,242,254,0.2);
+    border-color: rgba(139,123,243,0.3);
   }
 
   &::before {
@@ -450,7 +450,7 @@ const ProjectTitle = styled.h3`
 `;
 
 const ProjectCompany = styled.div`
-  color: #00f2fe;
+  color: #8b7bf3;
   font-size: 1.1rem;
   margin-bottom: 16px;
   font-weight: 500;
@@ -473,7 +473,7 @@ const ProjectDetails = styled.ul`
       content: '▹';
       position: absolute;
       left: 0;
-      color: #00f2fe;
+      color: #8b7bf3;
     }
   }
 `;
@@ -486,13 +486,13 @@ const ProjectLink = styled.a`
   text-decoration: none;
   margin-top: 16px;
   padding: 8px 16px;
-  background: rgba(0,242,254,0.1);
+  background: rgba(139,123,243,0.1);
   border-radius: 20px;
   font-size: 0.9rem;
   transition: all 0.3s ease;
 
   &:hover {
-    background: rgba(0,242,254,0.2);
+    background: rgba(139,123,243,0.2);
     transform: translateX(5px);
   }
 `;
@@ -538,16 +538,16 @@ const StatCard = styled.div`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 40px rgba(0,0,0,0.2);
-    border-color: rgba(0,242,254,0.2);
+    border-color: rgba(139,123,243,0.3);
   }
 `;
 
 const StatNumber = styled.div`
   font-size: 2.5rem;
   font-weight: 700;
-  color: #00f2fe;
+  color: #8b7bf3;
   margin-bottom: 8px;
-  text-shadow: 0 0 20px rgba(0,242,254,0.3);
+  text-shadow: 0 0 20px rgba(139,123,243,0.4);
 `;
 
 const StatLabel = styled.div`
@@ -607,23 +607,23 @@ const SkillCard = styled.div`
   padding: 30px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0,242,254,0.2);
-  box-shadow: 0 8px 32px rgba(0,242,254,0.15);
+  border: 1px solid rgba(139,123,243,0.2);
+  box-shadow: 0 8px 32px rgba(139,123,243,0.15);
   transition: all 0.3s ease;
   animation-delay: ${props => props.delay || '0s'};
 
   &:hover {
     transform: translateY(-5px);
-    border-color: rgba(0,242,254,0.4);
-    box-shadow: 0 12px 40px rgba(0,242,254,0.2);
+    border-color: rgba(139,123,243,0.4);
+    box-shadow: 0 12px 40px rgba(139,123,243,0.2);
   }
 `;
 
 const SkillIcon = styled.div`
   font-size: 2.5rem;
-  color: #00f2fe;
+  color: #8b7bf3;
   margin-bottom: 20px;
-  text-shadow: 0 0 20px rgba(0,242,254,0.3);
+  text-shadow: 0 0 20px rgba(139,123,243,0.4);
 `;
 
 const SkillTitle = styled.h3`
@@ -647,15 +647,15 @@ const SkillTags = styled.div`
 `;
 
 const SkillTag = styled.span`
-  background: rgba(0,242,254,0.1);
-  color: #00f2fe;
+  background: rgba(139,123,243,0.1);
+  color: #8b7bf3;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.9rem;
   transition: all 0.3s ease;
 
   &:hover {
-    background: rgba(0,242,254,0.2);
+    background: rgba(139,123,243,0.2);
     transform: translateY(-2px);
   }
 `;
@@ -686,61 +686,71 @@ const technologies = [
 
 const projects = [
   {
-    title: 'Near Shop And Go (2024 - Current)',
-    company: 'Software Alliance',
-    url: 'https://near.dk',
-    details: [
-      'Led the development of a comprehensive Laravel-based project.',
-      'Designed role-based access control for four distinct roles.',
-      'Integrated ProtegeGx SOAP APIs, Scribe for identification, and Stripe for payment processing.',
-      'Developed APIs for digital vending machines, utilizing Vendron services.'
-    ]
-  },
-  {
-    title: 'Unlimit Key (2023 - Current)',
-    company: 'Software Alliance',
-    url: 'https://admin.unlimitretail.dk/',
-    details: [
-      'Led the development of a comprehensive Laravel-based project.',
-      'Enabled QR code scanning for user-friendly interactions.',
-      'Developed APIs for digital vending machines, utilizing Vendron services.'
-    ]
-  },
-  {
-    title: 'Lexpal Chrome Extension (2024)',
-    company: 'Software Alliance',
+    title: 'NutriSense (Final year Project)',
+    company: 'Holistic Harmony NutriSense',
     url: '',
     details: [
-      'Created a dictionary extension in Vue.js, with API in Laravel.',
-      'Collaborated closely with front-end developers for seamless API integrations.'
+      'AI-driven nutrition app for personalized dietary recommendations',
+      'Features: User app for AI-based nutrition guidance and appointment system',
+      'Nutritionist app for patient management',
+      'Admin app for content and account management',
+      'Technology: Flutter for mobile and web; AI for health data analysis'
     ]
   },
   {
-    title: 'Queens OF Ten (2023)',
-    company: 'Software Alliance',
-    url: 'https://admin.queensoften.com/',
+    title: 'Sales Insights (Data Analysis Project)',
+    company: 'SQL-powered project',
+    url: '',
     details: [
-      'Implemented Multi-Auth functionality for distinct user types.',
-      'Integrated Stripe for secure payments.',
-      'Developed APIs for mobile apps (iOS & Android).'
+      'Customer behavior analysis and revenue trends',
+      'Market-specific sales insights',
+      'Data cleaning, transformation, and modeling',
+      'Interactive dashboard creation in Power BI',
+      'Technology: MySQL, Power BI, Power Query, DAX'
     ]
   },
   {
-    title: 'Employment Care (2022 - 2023)',
-    company: 'Software Alliance',
-    url: 'https://employmentcare.dk/',
+    title: 'HR Analytics (Data Analysis Project)',
+    company: 'Power BI Dashboard',
+    url: '',
     details: [
-      'Developed a dynamic website for CV and application creation.',
-      'Created a responsive interface with HTML and CSS.'
+      'Created HR Analytics dashboard for employee insights',
+      'Cleaned data and transformed attendance with Pivot Column',
+      'Used DAX queries and dynamic parameters',
+      'Advanced analysis of employee data'
     ]
   },
   {
-    title: 'Lexpal (2022)',
-    company: 'Software Alliance',
-    url: 'https://lexpal.com/',
+    title: 'Titanic - Survival Prediction',
+    company: 'Machine Learning Project',
+    url: '',
     details: [
-      'Developed dynamic dictionary website for language translation.',
-      'Implemented user-friendly interface for text translation.'
+      'Cleaned and preprocessed the Titanic dataset',
+      'Conducted EDA to identify key patterns',
+      'Built and tuned a Logistic Regression model',
+      'Achieved high accuracy in survival prediction'
+    ]
+  },
+  {
+    title: 'Time Series Analysis',
+    company: 'Global Land Temperatures',
+    url: '',
+    details: [
+      'Preprocessed data and evaluated model performance',
+      'Forecasted temperature trends using ARIMA',
+      'Applied Exponential Smoothing',
+      'Analyzed trends, seasonality, and patterns'
+    ]
+  },
+  {
+    title: 'Customer Segmentation',
+    company: 'K-Means Clustering Project',
+    url: '',
+    details: [
+      'Clustered customers based on spending behavior',
+      'Identified optimal clusters using Elbow Method',
+      'Applied Silhouette Score for validation',
+      'Provided insights via visualized customer segments'
     ]
   }
 ];
@@ -772,36 +782,36 @@ const Home = () => {
 
         <HeroContentWrapper>
           <TextContentContainer>
-            <Avatar src="https://ui-avatars.com/api/?name=Noman+Ahmad&background=232526&color=fff&size=180" alt="Noman Ahmad" />
-            <AnimatedTitle>Noman Ahmad</AnimatedTitle>
-            <Subtitle>Software Engineer / Laravel Developer</Subtitle>
+            <Avatar src="https://ui-avatars.com/api/?name=Sadia+Adrees&background=232526&color=fff&size=180" alt="Sadia Adrees" />
+            <AnimatedTitle>Sadia Adrees</AnimatedTitle>
+            <Subtitle>Gold medalist in Computer Science with a passion for data science, analytics, and business intelligence. Proficient in Python, C, C++, Java, PHP, HTML, and JavaScript, with hands-on experience in data analysis, machine learning, and database management. I bring a problem-solving mindset, attention to detail, and a drive to make data meaningful in real-world applications.</Subtitle>
             <CodeBlock>
               <Typewriter
-                words={[`$ php artisan make:model Project`,
-                        `const skills = ['Laravel', 'React', 'PHP', 'APIs'];`,
-                        `<Portfolio developer="Noman Ahmad" />`,
-                        `echo 'Let\'s build something amazing!';`]}
+                words={[`// Sadia Adrees`,
+                        `const skills = ['Data Science', 'Analytics', 'Machine Learning'];`,
+                        `SELECT * FROM insights;`,
+                        `print('Making data meaningful!')`]}
                 loop={0}
                 cursor
                 cursorStyle='|'
-                typeSpeed={55}
-                deleteSpeed={30}
-                delaySpeed={1800}
+                typeSpeed={50}
+                deleteSpeed={20}
+                delaySpeed={1500}
               />
             </CodeBlock>
             <ContactInfo>
-              {/* <span><FaMapMarkerAlt /> Lahore, Pakistan</span> */}
-              <span><FaPhone /> +923104549899</span>
-              <span><FaEnvelope /> letstar432@gmail.com</span>
+              <span><FaEnvelope /> sadia.adrees123@gmail.com</span>
+              <span><FaPhone /> +92 3074782315</span>
+              <span><FaMapMarkerAlt /> Lahore, Pakistan</span>
             </ContactInfo>
-            <CTAButton href="#contact">Let's Work Together</CTAButton>
+            <CTAButton href="#contact">Get in Touch</CTAButton>
           </TextContentContainer>
         </HeroContentWrapper>
 
       </HeroSection>
 
       <SkillsShowcaseSection>
-        <SkillsShowcaseTitle>Development Expertise</SkillsShowcaseTitle>
+        <SkillsShowcaseTitle>Skills Preview</SkillsShowcaseTitle>
         <SkillsShowcaseContainer>
           <SkillsGrid>
             <SkillCard delay="0.2s">
@@ -864,32 +874,33 @@ const Home = () => {
         <SectionTitle>Skills Preview</SectionTitle>
         <AnimatedUnderline />
         <CardsContainer>
-          <MemoizedCard title={<><CardBrackets>&#123;</CardBrackets>Backend & APIs<CardBrackets>&#125;</CardBrackets></>} bgGradient={gradients[0]}>
+          <MemoizedCard title={<><CardBrackets>&#123;</CardBrackets>Languages<CardBrackets>&#125;</CardBrackets></>} bgGradient={gradients[0]}>
+            <SkillBadge>Python</SkillBadge>
+            <SkillBadge>C</SkillBadge>
+            <SkillBadge>C++</SkillBadge>
+            <SkillBadge>Java</SkillBadge>
             <SkillBadge>PHP</SkillBadge>
-            <SkillBadge>Laravel</SkillBadge>
-            <SkillBadge>REST APIs</SkillBadge>
-            <SkillBadge>Soap APIs</SkillBadge>
-            <SkillBadge>MySQL</SkillBadge>
-            <SkillBadge>MongoDB</SkillBadge>
-            <SkillBadge>PostGreSQL</SkillBadge>
-          </MemoizedCard>
-          <MemoizedCard title={<><CardBrackets>&#123;</CardBrackets>Frontend & Tools<CardBrackets>&#125;</CardBrackets></>} bgGradient={gradients[1]}>
+            <SkillBadge>HTML</SkillBadge>
             <SkillBadge>JavaScript</SkillBadge>
-            <SkillBadge>Vue.js</SkillBadge>
-            <SkillBadge>React</SkillBadge>
-            <SkillBadge>Bootstrap</SkillBadge>
-            <SkillBadge>HTML5</SkillBadge>
-            <SkillBadge>CSS3</SkillBadge>
-            <SkillBadge>JQuery</SkillBadge>
           </MemoizedCard>
-          <MemoizedCard title={<><CardBrackets>&#123;</CardBrackets>DevOps & Integrations<CardBrackets>&#125;</CardBrackets></>} bgGradient={gradients[2]}>
-            <SkillBadge>Git</SkillBadge>
-            <SkillBadge>JIRA</SkillBadge>
-            <SkillBadge>Trello</SkillBadge>
-            <SkillBadge>Stripe</SkillBadge>
-            <SkillBadge>Quickpay</SkillBadge>
-            <SkillBadge>Billwerk</SkillBadge>
-            <SkillBadge>Vendron</SkillBadge>
+          <MemoizedCard title={<><CardBrackets>&#123;</CardBrackets>Data Science & ML<CardBrackets>&#125;</CardBrackets></>} bgGradient={gradients[1]}>
+            <SkillBadge>Numpy</SkillBadge>
+            <SkillBadge>Pandas</SkillBadge>
+            <SkillBadge>Matplotlib</SkillBadge>
+            <SkillBadge>Seaborn</SkillBadge>
+            <SkillBadge>Selenium</SkillBadge>
+            <SkillBadge>Beautifulsoup</SkillBadge>
+            <SkillBadge>Sk_learn</SkillBadge>
+          </MemoizedCard>
+          <MemoizedCard title={<><CardBrackets>&#123;</CardBrackets>Databases & Tools<CardBrackets>&#125;</CardBrackets></>} bgGradient={gradients[2]}>
+            <SkillBadge>MySQL</SkillBadge>
+            <SkillBadge>PostgreSQL</SkillBadge>
+            <SkillBadge>MongoDB</SkillBadge>
+            <SkillBadge>Jira</SkillBadge>
+            <SkillBadge>Github</SkillBadge>
+            <SkillBadge>Excel</SkillBadge>
+            <SkillBadge>Power BI</SkillBadge>
+            <SkillBadge>Google Looker</SkillBadge>
           </MemoizedCard>
         </CardsContainer>
       </Section>
@@ -903,7 +914,7 @@ const Home = () => {
               <ProjectTitle>{project.title}</ProjectTitle>
               <ProjectCompany>{project.company}</ProjectCompany>
               <ProjectDetails>
-                {project.details.slice(0, 3).map((detail, i) => (
+                {project.details.map((detail, i) => (
                   <li key={i}>{detail}</li>
                 ))}
               </ProjectDetails>
@@ -922,26 +933,26 @@ const Home = () => {
         <AnimatedUnderline />
         <StatsGrid>
           <StatCard delay="0.2s">
-            <StatNumber>5+</StatNumber>
-            <StatLabel>Years Experience</StatLabel>
+            <StatNumber>4+</StatNumber>
+            <StatLabel>Years in Industry</StatLabel>
           </StatCard>
           <StatCard delay="0.3s">
-            <StatNumber>50+</StatNumber>
-            <StatLabel>Projects Completed</StatLabel>
+            <StatNumber>5+</StatNumber>
+            <StatLabel>Key Projects</StatLabel>
           </StatCard>
           <StatCard delay="0.4s">
-            <StatNumber>30+</StatNumber>
-            <StatLabel>Happy Clients</StatLabel>
+            <StatNumber>Proven</StatNumber>
+            <StatLabel>Problem Solver</StatLabel>
           </StatCard>
           <StatCard delay="0.5s">
-            <StatNumber>100%</StatNumber>
-            <StatLabel>Client Satisfaction</StatLabel>
+            <StatNumber>Data-Driven</StatNumber>
+            <StatLabel>Insights</StatLabel>
           </StatCard>
         </StatsGrid>
       </StatsSection>
 
       <SliderSection>
-        <SliderTitle>Technologies I Use</SliderTitle>
+        <SliderTitle>Technologies & Tools</SliderTitle>
         <MemoizedSlider
           items={technologies}
           isTech={true}
@@ -955,8 +966,8 @@ const Home = () => {
       </SliderSection>
 
       <Section>
-        <SectionTitle>Recent Projects</SectionTitle>
-        <CodeDivider>&lt;/&gt; &lt;?php &#123; &#125;</CodeDivider>
+        <SectionTitle>Personal Projects</SectionTitle>
+        <CodeDivider>&#123; data; analysis; insights; &#125;</CodeDivider>
         <CardsContainer>
           {projects.map((project, idx) => (
             <MemoizedCard
@@ -975,22 +986,20 @@ const Home = () => {
       </Section>
 
       <Section alt>
-        <SectionTitle>Let's Work Together</SectionTitle>
+        <SectionTitle>Let's Connect</SectionTitle>
         <ContactTeaser>
-          Interested in working together or have a project in mind? <br />
-          <b>Let's connect!</b> <br />
+          I am always open to discussing new projects, opportunities, and collaborations.
+          Ready to make data meaningful?
           <a href="/contact" style={{color:'#fff', background:'#185a9d', padding:'10px 24px', borderRadius:'24px', textDecoration:'none', marginTop:'12px', display:'inline-block'}}>Contact Me</a>
         </ContactTeaser>
       </Section>
 
       <Footer>
         <Socials>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+          <a href="https://linkedin.com/in/sadia-adrees" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
           <a href="https://github.com" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
         </Socials>
-        &copy; {new Date().getFullYear()} Noman Ahmad. All rights reserved.
+        &copy; {new Date().getFullYear()} Sadia Adrees. All rights reserved.
       </Footer>
   </HomeContainer>
 );

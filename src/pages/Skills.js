@@ -5,10 +5,10 @@ import { FaCode } from 'react-icons/fa';
 
 const sectionBG = 'rgba(24,26,27,0.98)';
 const gradients = [
-  'linear-gradient(135deg, #ff512f 0%, #dd2476 100%)',
-  'linear-gradient(135deg, #36d1c4 0%, #1e3799 100%)',
-  'linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%)',
-  'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+  'linear-gradient(135deg, #8b7bf3 0%, #a79cfc 100%)',
+  'linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)',
+  'linear-gradient(135deg, #56ab2f 0%, #a8e063 100%)',
+  'linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%)',
 ];
 
 const floatCode = keyframes`
@@ -24,7 +24,7 @@ const FloatingCode = styled.div`
   overflow: hidden;
   span {
     position: absolute;
-    color: #00f2fe;
+    color: #8b7bf3;
     font-size: 2.2rem;
     opacity: 0.18;
     animation: ${floatCode} 8s linear infinite;
@@ -105,36 +105,37 @@ const Skills = () => (
     </FloatingCode>
     <SkillsTitle>My Skills</SkillsTitle>
     <CardsContainer>
-      <Card title="Backend Development" bgGradient={gradients[0]}>
+      <Card title="Languages" bgGradient={gradients[0]}>
         <SkillList>
-          <SkillItem>PHP, Laravel (Expert)</SkillItem>
-          <SkillItem>RESTful API Development</SkillItem>
-          <SkillItem>MySQL, PostgreSQL, MongoDB</SkillItem>
-          <SkillItem>Redis & Caching</SkillItem>
+          <SkillItem>Python</SkillItem>
+          <SkillItem>C, C++</SkillItem>
+          <SkillItem>Java</SkillItem>
+          <SkillItem>PHP</SkillItem>
+          <SkillItem>HTML</SkillItem>
+          <SkillItem>JavaScript</SkillItem>
         </SkillList>
       </Card>
-      <Card title="Frontend Development" bgGradient={gradients[1]}>
+      <Card title="Libraries & Frameworks" bgGradient={gradients[1]}>
         <SkillList>
+          <SkillItem>Python Lib: Numpy, Pandas, Matplotlib, Seaborn, Selenium, Beautifulsoup, Sk_learn</SkillItem>
+          <SkillItem>Laravel</SkillItem>
           <SkillItem>React.js, Vue.js</SkillItem>
-          <SkillItem>JavaScript (ES6+)</SkillItem>
-          <SkillItem>HTML5, CSS3, Bootstrap, JQuery</SkillItem>
-          <SkillItem>Responsive Design</SkillItem>
+          <SkillItem>Bootstrap, JQuery</SkillItem>
         </SkillList>
       </Card>
-      <Card title="DevOps & Tools" bgGradient={gradients[2]}>
+      <Card title="Databases & Data Related" bgGradient={gradients[2]}>
         <SkillList>
-          <SkillItem>Git & GitHub</SkillItem>
-          <SkillItem>Docker, Linux Server Management</SkillItem>
-          <SkillItem>CI/CD Pipelines</SkillItem>
-          <SkillItem>AWS & DigitalOcean</SkillItem>
+          <SkillItem>MySQL, PostgreSQL, MongoDB</SkillItem>
+          <SkillItem>Data Structure & Algorithms</SkillItem>
+          <SkillItem>Power BI, Google Looker, Excel (for analysis)</SkillItem>
         </SkillList>
       </Card>
-      <Card title="Development Practices" bgGradient={gradients[3]}>
+      <Card title="Methodologies & Tools" bgGradient={gradients[3]}>
         <SkillList>
-          <SkillItem>Test-Driven Development</SkillItem>
-          <SkillItem>Agile Methodologies</SkillItem>
-          <SkillItem>Code Review & Optimization</SkillItem>
-          <SkillItem>Security Best Practices, Documentation</SkillItem>
+          <SkillItem>Methodologies: SDLC, Agile, Scrum, Prototype, Spiral, XP</SkillItem>
+          <SkillItem>Tools: Jira, Github</SkillItem>
+          <SkillItem>Problem Solving, Innovative Thinking</SkillItem>
+          <SkillItem>Agile Mindset, Team Work, Team Leadership</SkillItem>
         </SkillList>
       </Card>
     </CardsContainer>

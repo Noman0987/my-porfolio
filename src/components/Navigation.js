@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const glassyBG = 'transparent';
-const accent = 'linear-gradient(90deg, #00f2fe 0%, #4facfe 100%)';
+const accent = '#8b7bf3';
 
 const slideDown = keyframes`
   from { max-height: 0; opacity: 0; }
@@ -26,7 +26,7 @@ const NavContainer = styled.nav`
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.12);
   backdrop-filter: blur(24px) saturate(1.7);
   -webkit-backdrop-filter: blur(24px) saturate(1.7);
-  border-bottom: 1.5px solid rgba(0,242,254,0.10);
+  border-bottom: 1.5px solid rgba(139,123,243,0.2);
   border-radius: 0 0 22px 22px;
   min-height: 62px;
 `;
@@ -51,7 +51,7 @@ const NavList = styled.ul`
     animation: ${({ open }) => open ? slideDown : 'none'} 0.4s cubic-bezier(.23,1.02,.32,1) both;
     backdrop-filter: ${({ open }) => open ? 'blur(16px) saturate(1.8)' : 'none'};
     -webkit-backdrop-filter: ${({ open }) => open ? 'blur(16px) saturate(1.8)' : 'none'};
-    border-bottom: 1px solid rgba(0,242,254,0.15);
+    border-bottom: 1px solid rgba(139,123,243,0.25);
     border-radius: 0 0 22px 22px;
     padding: ${({ open }) => (open ? '10px 0' : '0')};
   }
@@ -91,13 +91,13 @@ const NavLink = styled(Link)`
     opacity: 0;
     transform: scaleX(0.5);
     transition: opacity 0.2s, transform 0.2s;
-    box-shadow: 0 0 16px 2px #00f2fe99;
+    box-shadow: 0 0 16px 2px rgba(139,123,243,0.5);
     animation: navGlow 2.2s infinite alternate;
   }
   &:hover, &.active {
-    background: rgba(0,242,254,0.13);
-    color: #00f2fe;
-    box-shadow: 0 4px 24px 0 #00f2fe33;
+    background: rgba(139,123,243,0.15);
+    color: #fff;
+    box-shadow: 0 4px 24px 0 rgba(139,123,243,0.4);
   }
   &:hover::after, &.active::after {
     opacity: 1;
@@ -108,14 +108,14 @@ const NavLink = styled(Link)`
     padding: 12px 20px;
     margin: 0 15px;
     border-radius: 12px;
-    background: rgba(0,242,254,0.08);
+    background: rgba(139,123,243,0.1);
     &:hover, &.active {
-      background: rgba(0,242,254,0.15);
+      background: rgba(139,123,243,0.2);
     }
   }
   @keyframes navGlow {
-    0% { box-shadow: 0 0 8px 0 #00f2fe44; }
-    100% { box-shadow: 0 0 24px 4px #00f2fe99; }
+    0% { box-shadow: 0 0 8px 0 rgba(139,123,243,0.3); }
+    100% { box-shadow: 0 0 24px 4px rgba(139,123,243,0.6); }
   }
 `;
 

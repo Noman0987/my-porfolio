@@ -5,12 +5,12 @@ import { FaCode } from 'react-icons/fa';
 
 const sectionBG = 'rgba(24,26,27,0.98)';
 const gradients = [
-  'linear-gradient(135deg, #ff512f 0%, #dd2476 100%)',
-  'linear-gradient(135deg, #36d1c4 0%, #1e3799 100%)',
-  'linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%)',
-  'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-  'linear-gradient(135deg, #f7971e 0%, #ffd200 100%)',
-  'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
+  'linear-gradient(135deg, #8b7bf3 0%, #a79cfc 100%)',
+  'linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%)',
+  'linear-gradient(135deg, #56ab2f 0%, #a8e063 100%)',
+  'linear-gradient(135deg, #f7b733 0%, #fc4a1a 100%)',
+  'linear-gradient(135deg, #2bc0e4 0%, #eaecc6 100%)',
+  'linear-gradient(135deg, #42275a 0%, #734b6d 100%)',
 ];
 
 const floatCode = keyframes`
@@ -26,7 +26,7 @@ const FloatingCode = styled.div`
   overflow: hidden;
   span {
     position: absolute;
-    color: #00f2fe;
+    color: #8b7bf3;
     font-size: 2.2rem;
     opacity: 0.18;
     animation: ${floatCode} 8s linear infinite;
@@ -92,42 +92,36 @@ const Services = () => (
       <span style={{left:'80%', animationDelay:'3s'}}>&lt;div&gt;</span>
       <span style={{left:'50%', animationDelay:'4s'}}>&lt;h1&gt;</span>
     </FloatingCode>
-    <ServicesTitle>My Services</ServicesTitle>
+    <ServicesTitle>How I Can Help</ServicesTitle>
     <CardsContainer>
-      <Card title="Web Development" bgGradient={gradients[0]}>
+      <Card title="Data Analysis & Visualization" bgGradient={gradients[0]}>
         <ServiceDescription>
-          Custom web application development using Laravel framework. Building scalable, 
-          secure, and maintainable web solutions tailored to your business needs.
+          Extracting meaningful insights from complex datasets. Cleaning, transforming, and visualizing data using tools like Power BI, Google Looker, and various Python libraries.
         </ServiceDescription>
       </Card>
-      <Card title="API Development" bgGradient={gradients[1]}>
+      <Card title="Machine Learning Model Development" bgGradient={gradients[1]}>
         <ServiceDescription>
-          RESTful API development with Laravel, implementing best practices for security, 
-          performance, and documentation. Integration with third-party services and platforms.
+          Building and evaluating machine learning models for tasks like classification, regression, forecasting, and clustering. Applying techniques from libraries like scikit-learn.
         </ServiceDescription>
       </Card>
-      <Card title="Database Design" bgGradient={gradients[2]}>
+      <Card title="Database Management & Optimization" bgGradient={gradients[2]}>
         <ServiceDescription>
-          Expert database architecture and optimization. Designing efficient database 
-          structures, implementing migrations, and ensuring data integrity.
+          Designing efficient database schemas, implementing migrations, and optimizing database performance for SQL and NoSQL databases (MySQL, PostgreSQL, MongoDB).
         </ServiceDescription>
       </Card>
-      <Card title="Technical Consulting" bgGradient={gradients[3]}>
+      <Card title="Web Application Development" bgGradient={gradients[3]}>
         <ServiceDescription>
-          Providing expert advice on technology stack selection, architecture design, 
-          and development best practices for your projects.
+          Developing robust web applications with a focus on backend logic using PHP/Laravel and frontend interfaces with JavaScript frameworks like React and Vue.js.
         </ServiceDescription>
       </Card>
-      <Card title="Code Review & Optimization" bgGradient={gradients[4]}>
+      <Card title="API Design & Integration" bgGradient={gradients[4]}>
         <ServiceDescription>
-          Comprehensive code review services to ensure code quality, security, and 
-          performance optimization of existing applications.
+          Designing and developing RESTful APIs for seamless data exchange and integrating with third-party services to extend application functionality.
         </ServiceDescription>
       </Card>
-      <Card title="Maintenance & Support" bgGradient={gradients[5]}>
+      <Card title="Technical Consulting & Problem Solving" bgGradient={gradients[5]}>
         <ServiceDescription>
-          Ongoing maintenance and support services for Laravel applications, including 
-          updates, bug fixes, and performance monitoring.
+          Providing expert technical guidance on data science, machine learning, and software development challenges. Applying a problem-solving mindset to deliver effective solutions.
         </ServiceDescription>
       </Card>
     </CardsContainer>

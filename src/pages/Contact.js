@@ -18,7 +18,7 @@ const FloatingCode = styled.div`
   overflow: hidden;
   span {
     position: absolute;
-    color: #00f2fe;
+    color: #8b7bf3;
     font-size: 2.2rem;
     opacity: 0.18;
     animation: ${floatCode} 8s linear infinite;
@@ -95,8 +95,8 @@ const Input = styled.input`
   color: #fff;
   &:focus {
     outline: none;
-    border-color: #43cea2;
-    box-shadow: 0 0 0 2px #43cea244;
+    border-color: #8b7bf3;
+    box-shadow: 0 0 0 2px rgba(139,123,243,0.4);
   }
   @media (max-width: 600px) {
     padding: 10px;
@@ -116,8 +116,8 @@ const TextArea = styled.textarea`
   color: #fff;
   &:focus {
     outline: none;
-    border-color: #43cea2;
-    box-shadow: 0 0 0 2px #43cea244;
+    border-color: #8b7bf3;
+    box-shadow: 0 0 0 2px rgba(139,123,243,0.4);
   }
   @media (max-width: 600px) {
     padding: 10px;
@@ -127,7 +127,7 @@ const TextArea = styled.textarea`
 `;
 
 const SubmitButton = styled.button`
-  background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+  background: linear-gradient(90deg, #8b7bf3 0%, #a79cfc 100%);
   color: white;
   padding: 12px 24px;
   border: none;
@@ -137,7 +137,7 @@ const SubmitButton = styled.button`
   transition: all 0.3s ease;
   width: 100%;
   &:hover {
-    background: #2980b9;
+    background: linear-gradient(90deg, #a79cfc 0%, #8b7bf3 100%);
     transform: translateY(-2px);
   }
   @media (max-width: 600px) {
