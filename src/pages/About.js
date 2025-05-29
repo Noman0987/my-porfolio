@@ -128,9 +128,8 @@ const StyledImage = styled.img`
   height: 100%;
   border-radius: 15px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 0 16px rgba(0,242,254,0.2);
-  object-fit: cover;
+  object-fit: contain;
   object-position: 50% 15%;
-  transform: scale(1.3);
   transition: transform 0.5s ease-in-out;
 
   @media (max-width: 900px) {
@@ -161,7 +160,7 @@ const About = () => (
         {/* Replace the src with the path to your image file */}
         {/* For example: src="/images/noman-ahmad.png" */}
         {/* Make sure to place your image in the `public/images` directory */}
-        <StyledImage src="/my-image.png" alt="Your Name" />
+        <StyledImage src="/myimage1.png" alt="Your Name" />
       </ImageContainer>
     </AboutContent>
   </AboutContainer>
